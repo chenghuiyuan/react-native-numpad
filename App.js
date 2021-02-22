@@ -12,6 +12,11 @@ export default class App extends React.Component {
             <Display key={i} cursor value={101} />
           ))}
         </SafeAreaView>
+        <SafeAreaView>
+          {[3, 4, 5].map((i) => (
+            <Display key={i} cursor value={101} />
+          ))}
+        </SafeAreaView>
         <Input
           backspaceIcon={<Ionicons name="ios-backspace" {...Input.iconStyle} />}
           hideIcon={<Ionicons name="ios-arrow-down" {...Input.iconStyle} />}
