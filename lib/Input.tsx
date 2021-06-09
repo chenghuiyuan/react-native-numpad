@@ -104,7 +104,6 @@ export default class Input extends React.Component<InputProps> {
       this.props.textStyle,
     ];
     return (
-      <Animated.View style={[this.getStyle() as any, this.props.style]}>
         <View style={styles.input}>
           <View style={styles.pad}>
             {inputs.map((value, index) => {
@@ -138,7 +137,6 @@ export default class Input extends React.Component<InputProps> {
             </TouchableOpacity>
           </View>
         </View>
-        </Animated.View>
     );
   }
 }
