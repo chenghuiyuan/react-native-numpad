@@ -41,7 +41,7 @@ export default class NumberPad extends React.Component<
 
     // set current display
     this.setState({
-      display: (display as any)._reactInternalFiber.key,
+      display: (display as any)._reactInternals.key,
     });
 
     // show input
@@ -76,19 +76,19 @@ export default class NumberPad extends React.Component<
   };
 
   registerDisplay = (display: Display) => {
-    this.displays[(display as any)._reactInternalFiber.key] = display;
+    this.displays[(display as any)._reactInternals.key] = display;
   };
 
   unregisterDisplay = (display: Display) => {
-    delete this.displays[(display as any)._reactInternalFiber.key];
+    delete this.displays[(display as any)._reactInternals.key];
   };
 
   registerAvoidingView = (view: AvoidingView) => {
-    this.avoidingViews[(view as any)._reactInternalFiber.key] = view;
+    this.avoidingViews[(view as any)._reactInternals.key] = view;
   };
 
   unregisterAvoidingView = (view: AvoidingView) => {
-    delete this.avoidingViews[(view as any)._reactInternalFiber.key];
+    delete this.avoidingViews[(view as any)._reactInternals.key];
   };
 
   registerInput = (input: Input) => {
