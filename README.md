@@ -18,7 +18,7 @@ A simple React Native number pad for quickly updating multiple number inputs.
 ## Install
 
 ```
-yarn install react-native-numpad
+yarn add react-native-numpad
 ```
 
 ## Use Cases
@@ -112,6 +112,10 @@ Sometimes React Native's built-in [<KeyboardAvoidingView>](https://reactnative.d
 | Prop        | Description                                                                                                      | Default |
 | ----------- | ---------------------------------------------------------------------------------------------------------------- | ------- |
 | **`style`** | Any valid style object for a [`<View>`](https://reactnative.dev/docs/view) component (`Animated.View`, actually) | _None_  |
+
+## Version History (Change Log)
+
+View [here](./CHANGELOG.md).
 
 ## Contribute
 

@@ -1,14 +1,26 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import NumberPadContext from './NumberPadContext';
+import type Display from './Display';
+import type AvoidingView from './AvoidingView';
+import type Input from './Input';
 
-export default class NumberPad extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-  };
+type NumberPadProps = {};
 
-  constructor(props) {
+type NumberPadState = {
+  display: null | string;
+  input: null | Input;
+  height: number;
+};
+
+export default class NumberPad extends React.Component<
+  NumberPadProps,
+  NumberPadState
+> {
+  displays: Record<string, Display>;
+  avoidingViews: Record<string, AvoidingView>;
+
+  constructor(props: NumberPadProps) {
     super(props);
 
     this.displays = {};
@@ -21,7 +33,7 @@ export default class NumberPad extends Component {
     };
   }
 
-  focus = (display) => {
+  focus = (display: Display) => {
     // blur all displays except for this one and do not propagate
     Object.values(this.displays)
       .filter((d) => d !== display)
@@ -29,7 +41,7 @@ export default class NumberPad extends Component {
 
     // set current display
     this.setState({
-      display: display._reactInternalFiber.key,
+      display: (display as any)._reactInternalFiber.key,
     });
 
     // show input
@@ -63,35 +75,35 @@ export default class NumberPad extends Component {
     Object.values(this.avoidingViews).map((view) => view.hide());
   };
 
-  registerDisplay = (display) => {
-    this.displays[display._reactInternalFiber.key] = display;
+  registerDisplay = (display: Display) => {
+    this.displays[(display as any)._reactInternalFiber.key] = display;
   };
 
-  unregisterDisplay = (display) => {
-    delete this.displays[display._reactInternalFiber.key];
+  unregisterDisplay = (display: Display) => {
+    delete this.displays[(display as any)._reactInternalFiber.key];
   };
 
-  registerAvoidingView = (view) => {
-    this.avoidingViews[view._reactInternalFiber.key] = view;
+  registerAvoidingView = (view: AvoidingView) => {
+    this.avoidingViews[(view as any)._reactInternalFiber.key] = view;
   };
 
-  unregisterAvoidingView = (view) => {
-    delete this.avoidingViews[view._reactInternalFiber.key];
+  unregisterAvoidingView = (view: AvoidingView) => {
+    delete this.avoidingViews[(view as any)._reactInternalFiber.key];
   };
 
-  registerInput = (input) => {
+  registerInput = (input: Input) => {
     this.setState({
       input,
     });
   };
 
-  setHeight = (height) => {
+  setHeight = (height: number) => {
     this.setState({
       height,
     });
   };
 
-  onInputEvent = (event) => {
+  onInputEvent = (event: string) => {
     const display = this.display();
     display && display.onInputEvent(event);
   };

@@ -1,6 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TouchableOpacity, View, Text, Animated, Image } from 'react-native';
+import * as React from 'react';
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  Animated,
+  ViewStyle,
+  StyleProp,
+} from 'react-native';
 
 import NumberPadContext from './NumberPadContext';
 import { DELETE_ICON } from './images';
@@ -9,21 +15,22 @@ import styles from './styles';
 
 const inputs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'];
 
-export default class Input extends Component {
-  static contextType = NumberPadContext;
+type InputProps = {
+  height: number;
+  position: 'relative' | 'absolute';
+  style?: StyleProp<ViewStyle>;
+  backspaceIcon?: JSX.Element;
+  hideIcon?: JSX.Element;
+  onWillHide?: () => void;
+  onDidHide?: () => void;
+  onWillShow?: () => void;
+  onDidShow?: () => void;
+};
 
-  static propTypes = {
-    height: PropTypes.number,
-    position: PropTypes.oneOf(['relative', 'absolute']).isRequired,
-    style: PropTypes.object,
-    backspaceIcon: PropTypes.element,
-    hideIcon: PropTypes.element,
-    onWillHide: PropTypes.func,
-    onDidHide: PropTypes.func,
-    onWillShow: PropTypes.func,
-    onDidShow: PropTypes.func,
-    textStyle: PropTypes.object,
-  };
+export default class Input extends React.Component<InputProps> {
+  animation: Animated.Value;
+
+  static contextType = NumberPadContext;
 
   static defaultProps = {
     height: 300,
@@ -36,7 +43,7 @@ export default class Input extends Component {
     size: styles.buttonText.fontSize || 36,
   };
 
-  constructor(props) {
+  constructor(props: InputProps) {
     super(props);
 
     this.animation = new Animated.Value(0);
@@ -96,6 +103,7 @@ export default class Input extends Component {
       this.props.textStyle,
     ];
     return (
+      <Animated.View style={[this.getStyle() as any, this.props.style]}>
         <View style={styles.input}>
           <View style={styles.pad}>
             {inputs.map((value, index) => {
