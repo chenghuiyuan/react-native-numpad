@@ -137,6 +137,7 @@ export default class Input extends React.Component<InputProps> {
             </TouchableOpacity>
           </View>
         </View>
+        </Animated.View>
     );
   }
 }
