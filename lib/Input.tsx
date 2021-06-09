@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   TouchableOpacity,
+  Image,
   View,
   Text,
   Animated,
