@@ -101,7 +101,7 @@ export default class Display extends React.Component<
     onChange: () => {},
     isValid: () => true,
     cursor: false,
-    autofocus: false,
+    autofocus: true,
     decimalPlaces: 2,
     integerPlaces: 9,
     minimumDecimalPlaces: 2,
